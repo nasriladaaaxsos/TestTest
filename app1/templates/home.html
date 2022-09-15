@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ 
+
+    <style>
+        .continar {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/Home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap" />
+                </svg>
+                <span class="fs-4">PyPies</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/Home" class="nav-link active" aria-current="page">Dashboard</a></li>
+                <li class="nav-item"><a href='/AllPies' class="nav-link">Pie Derby</a></li>
+                <li class="nav-item"><a href='/logout' class="nav-link">Log out</a></li>
+        </header>
+    </div>
+    <h1>PyPies by {{request.session.firstname}}</h1>
+
+     <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <table class="table table-striped">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Action</th>           
+                    </tr>
+                    {% for Pie in AllPies %}
+                    <tr>
+                        <td>{{ Pie.id }}</td>
+                        <td>{{ Pie.piename }}</td>                    
+                        <td>            
+                            <a href='Update/{{ Pie.id }}'> Edit</a>
+                            <a href='Remove/{{ Pie.id }}'> Delete</a>   
+                        </td>
+                
+                    </tr>
+                    {% endfor %}
+                </table>
+            
+            </div>
+            <div class="col-sm">
+                
+        <h1>Add New Pypie</h1>
+        <form action="SavePie" method="POST">
+            <!--  action name is the name inside urls of app -->
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td> <label for="piename">Name:</label></td>
+                    <td><input type="text" id="piename" name="piename"></td>
+                </tr>
+                <tr>
+                    <td><label for="piefilling">Filling</label></td>
+                    <td> <input type="text" id="piefilling" name="piefilling">
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td><label for="piecrust">Crust</label></td>
+                    <td> <input type="text" id="piecrust" name="piecrust">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Add">
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </form>
+    
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    
+            </div>
+
+        </div>
+       
+    </div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Appointment </title>
+
+</head>
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/Home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                <span class="fs-4">Django</span>
+            </a>
+        
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/Home" class="nav-link active" aria-current="page">Dashboard</a></li>
+                <li class="nav-item"><a href='/AllPies' class="nav-link">Pie Derby</a></li>
+                <li class="nav-item"><a href='/logout' class="nav-link">Log out</a></li>
+        </header>
+    </div>
+    <h1>Edit an Pie</h1>
+    <form action="/Update" method="POST">
+        <!--  action name is the name inside urls of app -->
+        {% csrf_token %}
+        <input type="hidden" id="id" name="id" value="{{ updatepie.id }}">
+        <table>
+            <tr>
+                <td> <label for="piename">piename</label></td>
+                <td><input type="text" id="piename" name="piename" value="{{ updatepie.piename }}"></td>
+            </tr>
+            <tr>
+                <td><label for="piefilling">piefilling</label></td>
+                <td> <input type="text" id="piefilling" name="piefilling" value="{{ updatepie.piefilling }}">
+                </td>
+            </tr>
+            <tr>
+                <td><label for="piecrust"> piecrust</label></td>
+                <td> <input type="text" id="piecrust" name="piecrust" value="{{ updatepie.piecrust }}">
+                </td>
+            </tr>
+
+        
+
+            <tr>
+                <td>
+                    <input type="submit" value="Edit Pie">
+                </td>
+                <td></td>
+            </tr>
+
+        </table>
+    </form>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+</body>
+</html>

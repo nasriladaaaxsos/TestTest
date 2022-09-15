@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/Home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap" />
+                </svg>
+                <span class="fs-4">PyPies</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/Home" class="nav-link active" aria-current="page">Dashboard</a></li>
+                <li class="nav-item"><a href='/AllPies' class="nav-link">Pie Derby</a></li>
+                <li class="nav-item"><a href='/logout' class="nav-link">Log out</a></li>
+        </header>
+    </div>
+    <h1>Pie Derby</h1>
+
+    
+    <table >
+        <tr>
+            <th >Id</th>
+            <th >Name</th>
+            <th >PyPie By</th>
+            <th >Votes</th>           
+        </tr>
+        {% for pie in allpies %}
+        <tr>
+            <td>{{ pie.id }}</td>
+            <td><a href='Show/{{pie.id}}'> {{ pie.piename }} </a></td>  
+            <td>{{ pie.createdby.firstname }}</td>                  
+            <td>            
+                {{ pie.Users.all|length }}
+            </td>
+    
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</body>
+</html>
